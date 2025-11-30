@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talha Graphic — Portfolio Preview</title>
+  <style>
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:'Poppins',sans-serif;background:#fff;color:#333;overflow-x:hidden;}
+    header{background:#0b1f4a;color:#fff;height:750px;position:relative;text-align:center;overflow:hidden;}
+    header h1{font-size:52px;margin:0;position:absolute;top:20%;left:50%;transform:translate(-50%,-50%);opacity:0;animation:fadeUp 1.8s ease forwards;}
+    @keyframes fadeUp {
+      0% {opacity:0; transform:translate(-50%,20%);}
+      100% {opacity:1; transform:translate(-50%,-50%);}
+    }
+    .section{max-width:1200px;margin:auto;padding:70px 20px;opacity:0;transform:translateY(60px);transition:.8s;}
+    .show{opacity:1!important;transform:translateY(0)!important;}
+    .stats{display: flex;justify-content:space-around;text-align:center;margin-top:40px;flex-wrap:wrap;}
+    .stats div{font-size:28px;font-weight:600;}
+    .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;}
+    .service-box{background:#eef5ff;padding:20px;border-radius:12px;box-shadow:0 0 15px #dce7ff;transition:transform .3s ease;}
+    .service-box:hover{transform:scale(1.05);}
+    .skills{margin-top:40px;}
+    .skill{margin-bottom:20px;}
+    .skill-title{font-weight:600;margin-bottom:5px;}
+    .progress{height:10px;background:#ddd;border-radius:5px;overflow:hidden;}
+    .progress-bar{height:100%;background:#0b1f4a;width:0%;transition:width 1.5s ease-in-out;}
+    .social{display:flex;gap:20px;justify-content:center;margin-top:20px;flex-wrap:wrap;}
+    .social a{background:#fff;padding:15px 25px;border-radius:10px;box-shadow:0 0 10px #ccc;text-decoration:none;color:#333;font-weight:600;display:flex;align-items:center;justify-content:center;transition:transform .3s ease;}
+    .social a:hover{transform:scale(1.1);}
+    .social img{width:28px;height:28px;margin-right:10px;}
+    .contact-box{background:#eef7ff;padding:30px;border-radius:15px;max-width:800px;margin:auto;box-shadow:0 0 15px #c8ddff;}
+    input,textarea{width:100%;padding:12px;margin:10px 0;border-radius:8px;border:1px solid #ccc;font-family:'Poppins';}
+    button{padding:12px 20px;border:none;background:#0b1f4a;color:#fff;font-size:16px;border-radius:10px;cursor:pointer;}
+    #msgPopup{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.6);background:#e7f7ed;padding:40px;border-radius:20px;text-align:center;box-shadow:0 0 25px rgba(0,0,0,0.2);transition:all .5s ease;z-index:9999;}
+    #msgPopup.show{display:block;opacity:1;transform:translate(-50%,-50%) scale(1);}
+    .faq-container{max-width:900px;margin:80px auto;padding:0 20px;}
+    .faq h2{text-align:center;font-size:32px;margin-bottom:30px;}
+    .faq-item{background:#f8f9fb;border-radius:10px;margin-bottom:15px;padding:20px;box-shadow:0 0 10px rgba(0,0,0,0.05);cursor:pointer;position:relative;}
+    .faq-item h3{margin:0;font-size:18px;display:flex;justify-content:space-between;align-items:center;}
+    .faq-item p{max-height:0;overflow:hidden;opacity:0;transition:all 0.4s ease;margin-top:10px;}
+    .faq-item.active p{max-height:200px;opacity:1;}
+    .faq-item span{font-size:24px;transition:transform 0.3s ease;}
+    .faq-item.active span{transform:rotate(45deg);}
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      header{height:420px;padding:40px 10px}
+      header h1{font-size:32px;top:40%;left:50%;transform:translate(-50%,-40%);padding:0 12px;line-height:1.15}
+      .section{padding:40px 16px}
+      .stats{flex-direction:column;align-items:center;gap:12px}
+      .stats div{font-size:22px;padding:6px 0}
+      .services{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+      .service-box{padding:16px}
+      .social a{padding:12px 16px;font-size:15px}
+      .social img{width:24px;height:24px;margin-right:8px}
+      .contact-box{padding:20px}
+      input,textarea{padding:10px}
+      .faq h2{font-size:24px}
+      .faq-item h3{font-size:16px}
+      footer{padding:20px;font-size:14px;text-align:center}
+      #msgPopup{padding:24px}
+    }
+
+    @media (max-width: 480px) {
+      header{height:360px}
+      header h1{font-size:26px;top:42%;transform:translate(-50%,-42%)}
+      .section{padding:30px 12px}
+      .service-box{padding:14px}
+      .social img{width:20px;height:20px;margin-right:6px}
+      .social a{padding:10px 12px}
+      .stats div{font-size:18px}
+      .progress{height:8px}
+      .faq-item p{max-height:300px}
+    }
+  </style>
+</head>
+<body>
+<header class="fade">
+  <h1>Thumbnail Strategy<br>that <span style="color:#4ea8de;">works.</span></h1>
+</header>
+<section class="section fade">
+  <h2>Yo, I'm Talha!</h2>
+  <p>I help YouTubers, creators and businesses grow with powerful thumbnails & design strategy.</p>
+  <div class="stats">
+    <div><span id="counter" style="font-size:42px;font-weight:700;display:block;">0</span>Thumbnail Clicks</div>
+    <div>700+<br>Designs Created</div>
+    <div>10+<br>Creator Clients</div>
+  </div>
+</section>
+<section class="section fade">
+  <h2>My Services</h2>
+  <div class="services">
+    <div class="service-box">Thumbnail Design</div>
+    <div class="service-box">Logo Design</div>
+    <div class="service-box">Poster Design</div>
+    <div class="service-box">Banner Design</div>
+    <div class="service-box">Portfolio Design</div>
+    <div class="service-box">And Many More…</div>
+  </div>
+</section>
+<section class="section fade">
+  <h2>My Skills</h2>
+  <div class="skills">
+    <div class="skill">
+      <div class="skill-title">Photoshop — 100%</div>
+      <div class="progress"><div class="progress-bar" style="width:100%"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-title">Illustrator — 95%</div>
+      <div class="progress"><div class="progress-bar" style="width:95%"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-title">Canva — 90%</div>
+      <div class="progress"><div class="progress-bar" style="width:90%"></div></div>
+    </div>
+  </div>
+</section>
+<section class="section fade faq-container">
+  <div class="faq">
+    <h2>Most Common Questions</h2>
+    <div class="faq-item"><h3>Do you guarantee a high CTR?<span>+</span></h3><p>I can't guarantee a fixed CTR, but my designs are optimized using proven YouTube strategies that consistently boost performance.</p></div>
+    <div class="faq-item"><h3>Do you only design or help with strategy too?<span>+</span></h3><p>I provide both! I help you craft effective strategy and designs that connect with your audience.</p></div>
+    <div class="faq-item"><h3>Can I get the PSD file?<span>+</span></h3><p>Yes, the PSD file is available as a paid option. Click <a href="https://wa.me/923212118309" target="_blank">here</a> to get it.</p></div>
+    <div class="faq-item"><h3>What’s your typical turnaround time?<span>+</span></h3><p>Most designs are delivered within 12–24 hours, depending on the complexity of the project.</p></div>
+    <div class="faq-item"><h3>What are your payment terms?<span>+</span></h3><p>Payments are handled securely before final delivery via trusted payment gateways or direct transfer.</p></div>
+    <div class="faq-item"><h3>Do you revise if I don’t like the first draft?<span>+</span></h3><p>Yes, 2 free revisions are included to make sure you’re fully satisfied with the result.</p></div>
+    <div class="faq-item"><h3>How many revisions do I get?<span>+</span></h3><p>You get 2 free revisions. Additional revisions can be requested if needed.</p></div>
+    <div class="faq-item"><h3>What makes your thumbnails different?<span>+</span></h3><p>Every design I make focuses on audience psychology, color theory, and visual storytelling to maximize engagement.</p></div>
+  </div>
+</section>
+<section class="section fade">
+  <h2>I'm All Over the Internet</h2>
+  <div class="social">
+    <a href="https://www.instagram.com/talha_graphic11/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">Instagram</a>
+    <a href="https://www.tiktok.com/@talha_graphic" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">TikTok</a>
+    <a href="https://wa.me/923212118309" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">WhatsApp</a>
+  </div>
+</section>
+<section class="section fade">
+  <h2>Work With Me</h2>
+  <div class="contact-box">
+    <p>Drop your details and let’s work together!</p>
+    <form id="contactForm">
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
+      <input type="email" id="email" name="email" placeholder="Your Email" required>
+      <textarea id="message" name="message" placeholder="Your Project Details..." required></textarea>
+      <p style="color:red;font-weight:600;">📞 Call Not Available (Only for Large Projects)</p>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+<footer class="fade">© 2025 Talha Graphic — All Rights Reserved</footer>
+<div id="msgPopup">
+  <h2>✔ Congratulations!</h2>
+  <p>Message sent successfully.<br>Please wait 1–2 hours for reply.</p>
+</div>
+<script>
+const elements=document.querySelectorAll('.fade');
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show');});},{threshold:0.2});
+elements.forEach(el=>observer.observe(el));
+let frame=0;const end=550000000,totalFrames=4000/16;
+function animateCounter(){frame++;let progress=frame/totalFrames;let current=Math.floor(end*progress);
+document.getElementById('counter').innerText=(current/1000000).toFixed(1)+'M';
+if(progress<1)requestAnimationFrame(animateCounter);else document.getElementById('counter').innerText='550M';}
+const counterObs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){animateCounter();counterObs.disconnect();}});});
+counterObs.observe(document.getElementById('counter'));
+const form=document.getElementById('contactForm');
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  const name=document.getElementById('name').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const message=document.getElementById('message').value.trim();
+  const encodedMsg=`Hello Talha!%0AMy Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMessage: ${encodeURIComponent(message)}`;
+  const whatsappURL=`https://wa.me/923212118309?text=${encodedMsg}`;
+  window.open(whatsappURL,'_blank');
+  document.getElementById('msgPopup').classList.add('show');
+  setTimeout(()=>document.getElementById('msgPopup').classList.remove('show'),3000);
+  form.reset();
+});
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    item.classList.toggle('active');
+  });
+});
+</script>
+</body>
+</html>
